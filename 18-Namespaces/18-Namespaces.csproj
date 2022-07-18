@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>_18_Namespaces</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyNamespace\MyNamespace.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="14-CollectionDictionary">
+      <HintPath>..\14-CollectionDictionary\obj\Debug\net5.0\14-CollectionDictionary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
