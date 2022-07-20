@@ -19,6 +19,45 @@ namespace _4_BinarySearchTree
             return FindWithParent(value, out parent) != null;
         }
 
+        public void Add (T value)
+        {
+            if (_root == null)
+            {
+                _root = new TreeNode<T>(value);
+
+            }
+            else
+            {
+                AddTo(_root, value);
+            }
+            _count++;
+        }
+        private void AddTo(TreeNode<T> node, T value)
+        {
+            if (value.CompareTo(node.Value) < 0)
+
+            {
+                if (node.Left == null)
+                {
+                    node.Left = new TreeNode<T>(value);
+                }
+                else
+                {
+                    AddTo(node.Left, value);
+                }
+            }
+            else
+            {
+                if (node.Right == null)
+                {
+                    node.Right = new TreeNode<T>(value);
+                }
+                else
+                {
+                    AddTo(node.Right, value);
+                }
+            }
+        }
 
         private TreeNode<T> FindWithParent(T value, out TreeNode<T> parent)
         {
@@ -49,9 +88,16 @@ namespace _4_BinarySearchTree
         {
             if (node != null)
             {
+                if (node == null)
+                    yield break;
+
+                if (node.Left != null)
+                    foreach (var n in PreOrder(node.Left)) yield return n;
+
+                if (node.Right != null)
+                    foreach (var n in PreOrder(node.Right)) yield return n;
+
                 yield return node.Value;
-                PreOrder(node.Left);
-                PreOrder(node.Right);
             }
         }
         public IEnumerable<T> PostOrder(TreeNode<T> node)
