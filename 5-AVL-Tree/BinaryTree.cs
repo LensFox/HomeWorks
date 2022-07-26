@@ -9,8 +9,8 @@ namespace _5_AVL_Tree
 {
     internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
     {
-        private BinaryTreeNode<T> _root;
-        public BinaryTreeNode<T> Root { set { } get { return _root; } }
+        public BinaryTreeNode<T> _root { set; get; }
+        
         private int _count;
 
         public int Count { get { return _count; } }

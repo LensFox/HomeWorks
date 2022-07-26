@@ -158,13 +158,13 @@ namespace _5_AVL_Tree
                 {
                     this.Parent.Right = newRoot;
                 }
-                newRoot.Parent = this.Parent;
-                this.Parent = newRoot;
             }
             else
             {
-                _tree.Root = newRoot;
+                _tree._root = newRoot;
             }
+            newRoot.Parent = this.Parent;
+            this.Parent = newRoot;
         }
     }
 
