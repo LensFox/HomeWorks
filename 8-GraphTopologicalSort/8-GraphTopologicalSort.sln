@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8-GraphTopologicalSort", "8-GraphTopologicalSort.csproj", "{210774F5-83C3-494A-926A-9FCA24BA9E40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "7-TheShortestPath", "..\7-TheShortestPath\7-TheShortestPath.csproj", "{66D5BE97-1AAE-4B6B-B6E0-2FD09D266148}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{210774F5-83C3-494A-926A-9FCA24BA9E40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210774F5-83C3-494A-926A-9FCA24BA9E40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210774F5-83C3-494A-926A-9FCA24BA9E40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210774F5-83C3-494A-926A-9FCA24BA9E40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66D5BE97-1AAE-4B6B-B6E0-2FD09D266148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66D5BE97-1AAE-4B6B-B6E0-2FD09D266148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66D5BE97-1AAE-4B6B-B6E0-2FD09D266148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66D5BE97-1AAE-4B6B-B6E0-2FD09D266148}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1C4DA13D-8190-4ACB-86F9-9108A4605038}
+	EndGlobalSection
+EndGlobal
