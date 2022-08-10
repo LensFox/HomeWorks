@@ -23,36 +23,47 @@ namespace _5_PhoneBook
         {
             Console.WriteLine("Hello World!");
 
-            var file = new FileInfo(@"F:\Tests\TelephoneBook.xml");
+            // 1. create Contact[]
+            // 2. writexml(con)
+            // 3. var cont = readXml(path);
+            // foreach (c in cont)
 
-            var xmlWriter = new XmlTextWriter(@"F:\Tests\TelephoneBook.xml", null);
+            Contact[] phoneBook = new Contact[]
+            {
+                new Contact("Misha Dziamianchyk", "0938377673"),
+                new Contact("Lena Ivankova", "0974567829"),
+                new Contact("Dima Slepiankou", "038747203"),
+                new Contact("Kostya Rubanau", "9978900292")
+            };
+
+            string path = @"F:\Tests\TelephoneBook.xml";
+            WriteToXml(phoneBook, path);
+            ShowXml(path);
+        }
+
+        public static void WriteToXml(Contact[] contacts, string path)
+        {
+            var file = new FileInfo(path);
+
+            var xmlWriter = new XmlTextWriter(path, null);
             xmlWriter.Formatting = Formatting.Indented;
 
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("MyContacts");
-            xmlWriter.WriteStartElement("Contact");
-            xmlWriter.WriteStartAttribute("Name");
-            xmlWriter.WriteString("VasyaShyshkin");
-            xmlWriter.WriteStartAttribute("TelephoneNumber");
-            xmlWriter.WriteString("098655345");
-            xmlWriter.WriteEndAttribute();
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndElement();
+
+            foreach (var c in contacts)
+            {
+                xmlWriter.WriteStartElement("Contact");
+                xmlWriter.WriteStartAttribute("Name");
+                xmlWriter.WriteString(c.Name);
+                xmlWriter.WriteStartAttribute("TelephoneNumber");
+                xmlWriter.WriteString(c.PhoneNumber);
+                xmlWriter.WriteEndAttribute();
+                xmlWriter.WriteEndElement();
+            }
             xmlWriter.Close();
-
-            string path = @"F:\Tests\TelephoneBook.xml";
-
-            ShowPhoneNumbers(path);
-
         }
         public static void ShowXml(string path)
-        {
-            var document = new XmlDocument();
-            document.Load(path);
-
-            Console.WriteLine(document.InnerXml);
-        }
-        public static void ShowPhoneNumbers(string path)
         {
             var document = new XPathDocument(path);
             XPathNavigator navigator = document.CreateNavigator();
@@ -61,12 +72,11 @@ namespace _5_PhoneBook
             {
                 XPathNavigator navigator2 = iterator.Current.Clone();
                 navigator2.MoveToFirstAttribute();
+                var name = navigator2.Value;
                 navigator2.MoveToNextAttribute();
-                Console.WriteLine(navigator2.Value);
+                var number = navigator2.Value;
+                Console.WriteLine("Name: {0}  Phone number: {1}", name, number);
             }
-
-
-
         }
     }
 }
