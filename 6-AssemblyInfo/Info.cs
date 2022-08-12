@@ -5,40 +5,48 @@ namespace _6_AssemblyInfo
 {
     internal static class Info
     {
-        public static void PrintClassInfo(object classInstance)
+        public static void PrintAssemblyInfo(Assembly assembly)
         {
-            Type type = classInstance.GetType();
-            Console.WriteLine("Name: {0}\n" +
-                "Class: {1}\n" +
-                "Base type: {2}\n" +
-                "Sealed: {3}",
-                type.FullName, type.IsClass, type.BaseType, type.IsSealed);
+            Type[] assemblyTypes = assembly.GetTypes();
+            foreach (Type typ in assemblyTypes)
+            {
+                Console.WriteLine("Type: {0}, IsPublic:{1}", typ.Name, typ.IsPublic);
+            }
         }
-        public static void PrintMethods(object classInstance)
+        public static void PrintMethods(Assembly assembly)
         {
-            Type type = classInstance.GetType();
-            MethodInfo[] mi = type.GetMethods(BindingFlags.Instance | BindingFlags.Public |
-                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
-            foreach (MethodInfo m in mi)
-                Console.WriteLine(m.Name);
-            Console.WriteLine($"Class {type.Name} contains {mi.Length} methods");
+            Type[] assemblyTypes = assembly.GetTypes();
+            foreach (Type typ in assemblyTypes)
+            {
+                MethodInfo[] mi = typ.GetMethods(BindingFlags.Instance | BindingFlags.Public |
+                    BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+                foreach (MethodInfo m in mi)
+                    Console.WriteLine(m.Name);
+                Console.WriteLine($"Class {typ.Name} contains {mi.Length} methods");
+            }
         }
-        public static void PrintFields(object classInstance)
+        public static void PrintFields(Assembly assembly)
         {
-            Type type = classInstance.GetType();
-            FieldInfo[] fi = type.GetFields(BindingFlags.Instance | BindingFlags.Public |
-                BindingFlags.Static | BindingFlags.NonPublic);
-            foreach (FieldInfo f in fi)
-                Console.WriteLine(f.Name);
-            Console.WriteLine($"Class {type.Name} contains {fi.Length} fields");
+            Type[] assemblyTypes = assembly.GetTypes();
+            foreach (Type typ in assemblyTypes)
+            {
+                FieldInfo[] fi = typ.GetFields(BindingFlags.Instance | BindingFlags.Public |
+                 BindingFlags.Static | BindingFlags.NonPublic);
+                foreach (FieldInfo f in fi)
+                    Console.WriteLine(f.Name);
+                Console.WriteLine($"Class {typ.Name} contains {fi.Length} fields");
+            }
         }
-        public static void PrintProperties(object classInstance)
+        public static void PrintProperties(Assembly assembly)
         {
-            Type type = classInstance.GetType();
-            PropertyInfo[] pi = type.GetProperties();
-            foreach (PropertyInfo p in pi)
-                Console.WriteLine(p.Name);
-            Console.WriteLine($"Class {type.Name} contains {pi.Length} fields");
+            Type[] assemblyTypes = assembly.GetTypes();
+            foreach (Type typ in assemblyTypes)
+            {
+                PropertyInfo[] pi = typ.GetProperties();
+                foreach (PropertyInfo p in pi)
+                    Console.WriteLine(p.Name);
+                Console.WriteLine($"Class {typ.Name} contains {pi.Length} fields");
+            }
         }
     }
 }
