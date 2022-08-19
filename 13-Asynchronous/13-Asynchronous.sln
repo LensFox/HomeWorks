@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13-Asynchronous", "13-Asynchronous.csproj", "{34B12A2F-9C6F-4D66-8251-ADD59F2B935E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13-IHateWindowsForms", "..\13-IHateWindowsForms\13-IHateWindowsForms.csproj", "{E383CB33-E060-4621-A78A-3DF1A79BEADD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34B12A2F-9C6F-4D66-8251-ADD59F2B935E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B12A2F-9C6F-4D66-8251-ADD59F2B935E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B12A2F-9C6F-4D66-8251-ADD59F2B935E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B12A2F-9C6F-4D66-8251-ADD59F2B935E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E383CB33-E060-4621-A78A-3DF1A79BEADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E383CB33-E060-4621-A78A-3DF1A79BEADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E383CB33-E060-4621-A78A-3DF1A79BEADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E383CB33-E060-4621-A78A-3DF1A79BEADD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98291F84-DADA-4208-9735-BE4CB6A39568}
+	EndGlobalSection
+EndGlobal
