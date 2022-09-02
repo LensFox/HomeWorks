@@ -1,5 +1,6 @@
 --lesson8
 use HomeTask
+--this is the comment
 
 select top (1) tab.Airport, sum(tab.FlightsCount) as [Count] from
 (select DepartureAirport as Airport, count(*) as FlightsCount
