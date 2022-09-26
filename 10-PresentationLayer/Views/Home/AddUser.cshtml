@@ -1,0 +1,14 @@
+﻿@using _10_Models
+@model User
+<h1>NEW USER</h1>
+<fieldset>
+    <form method="post" action="~/Home/AddUserProceedResult">
+        <label>First Name:</label><br />
+        <input type="text" name="FirstName" /><br />
+        <label>Last Name:</label><br />
+        <input type="text" name="LastName" /><br />
+        <label>Age:</label><br />
+        <input type="number" name="Age" /><br />
+        <input type="submit" value="ADD">
+    </form>
+</fieldset>
