@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace _10_ThreeLayerProject.BLL
 {
-    public class UserService : IUserService/* IDisposable*/
+    public class UserService : IUserService
     {
         private IUserRepository userRepository;
         public UserService(IUserRepository userRepository)

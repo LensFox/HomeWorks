@@ -10,6 +10,7 @@ namespace _10_ThreeLayerProject.BLL
         public void Create(User user);
         public void Update(User user);
         public void Delete(int id);
+        public void DeleteByName(string name);
     }
 }
 

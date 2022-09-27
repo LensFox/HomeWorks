@@ -6,8 +6,8 @@ namespace _10_ThreeLayerProject.PL.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserService userService;
-        public HomeController(UserService userService)
+        private readonly IUserService userService;
+        public HomeController(IUserService userService)
         {
             this.userService = userService;
         }

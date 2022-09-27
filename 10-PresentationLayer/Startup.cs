@@ -1,14 +1,9 @@
 using _10_ThreeLayerProject.BLL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace _10_ThreeLayerProject.PL
 {
@@ -25,6 +20,7 @@ namespace _10_ThreeLayerProject.PL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddControllersWithViews();
             services.AddTransient<IUserService, UserService>();
             services.AddRepositories();
         }

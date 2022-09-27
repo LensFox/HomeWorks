@@ -1,6 +1,15 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using System;
 
-app.MapGet("/", () => "Hello World!");
+namespace _10_ThreeLayerProject.DAL
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
 
-app.Run();
+
+

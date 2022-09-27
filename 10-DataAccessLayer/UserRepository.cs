@@ -1,7 +1,9 @@
 ﻿using _10_Models;
+using System.Collections.Generic;
+
 namespace _10_ThreeLayerProject.DAL
 {
-    public class UserRepository : IUserRepository /*IDisposable*/
+    public class UserRepository : IUserRepository 
     {
 
         private UsersContext context;
@@ -27,12 +29,14 @@ namespace _10_ThreeLayerProject.DAL
         public void Update(User user)
         {
             context.Users.Update(user);
+            context.SaveChanges();
         }
         public void Delete(int id)
         {
             var user = context.Users.Find(id);
             if (user != null)
                 context.Users.Remove(user);
+            context.SaveChanges();
         }
     }
 }
