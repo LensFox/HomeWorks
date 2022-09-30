@@ -2,6 +2,7 @@
 using _10_ThreeLayerProject.DAL;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _10_ThreeLayerProject.BLL
 {
@@ -18,12 +19,10 @@ namespace _10_ThreeLayerProject.BLL
 
         public IEnumerable<User> ReadAll()
         {
-            var users = userRepository.ReadAll();
-            var result = new List<User>();
-            foreach (var item in users)
-                result.Add(mapper.Map<User>(item));
+            var userEntities = userRepository.ReadAll();
+            var users = mapper.Map<List<User>>(userEntities);
 
-            return result;
+            return users;
         }
 
         public User Read(int id)
