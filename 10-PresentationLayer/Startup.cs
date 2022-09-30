@@ -32,6 +32,7 @@ namespace _10_ThreeLayerProject.PL
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new UserProfile());
+                cfg.AddProfile(new BLL.UserProfile());
             }).CreateMapper());
         }
 

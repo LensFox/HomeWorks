@@ -21,11 +21,14 @@ namespace _10_ThreeLayerProject.PL.Middleware
             }
             finally
             {
-                logger.LogInformation("LOG MIDDLEWARE");
-                logger.LogError("Request {method} {url} => {statusCode}",
-                 context.Request?.Method,
-                 context.Request?.Path.Value,
-                 context.Response?.StatusCode);
+                if(context.Response?.StatusCode / 100 != 2)
+                {
+                    logger.LogInformation("LOG MIDDLEWARE");
+                    logger.LogError("Request {method} {url} => {statusCode}",
+                     context.Request?.Method,
+                     context.Request?.Path.Value,
+                     context.Response?.StatusCode);
+                }
             }
         }
     }
