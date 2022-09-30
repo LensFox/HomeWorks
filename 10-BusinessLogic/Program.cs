@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _10_ThreeLayerProject.DAL;
+using System;
 
 namespace _10_ThreeLayerProject.BLL._10_BusinessLogic
 {

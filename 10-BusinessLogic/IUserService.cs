@@ -1,4 +1,4 @@
-﻿using _10_Models;
+﻿using _10_ThreeLayerProject.BLL.Entitites;
 using System.Collections.Generic;
 
 namespace _10_ThreeLayerProject.BLL
@@ -11,6 +11,7 @@ namespace _10_ThreeLayerProject.BLL
         public void Update(User user);
         public void Delete(int id);
         public void DeleteByName(string name);
+        public void UpdateById(User user);
     }
 }
 

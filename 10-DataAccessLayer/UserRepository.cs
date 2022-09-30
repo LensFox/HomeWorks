@@ -1,4 +1,4 @@
-﻿using _10_Models;
+﻿using _10_ThreeLayerProject.DAL.Entities;
 using System.Collections.Generic;
 
 namespace _10_ThreeLayerProject.DAL

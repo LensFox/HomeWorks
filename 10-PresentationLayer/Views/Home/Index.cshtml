@@ -1,5 +1,5 @@
-﻿@using _10_Models
-@model IEnumerable<User>
+﻿@using _10_ThreeLayerProject.PL.Models
+@model IEnumerable<UserModel>
 
 <link rel="stylesheet" href="~/css/table.css" />
 <h2>Users</h2>
@@ -9,14 +9,14 @@
         <th>Name</th>
         <th>Age</th>
     </tr>
-        @foreach (User user in Model)
-        {
+    @foreach (UserModel user in Model)
+    {
         <tr>
             <td>@user.Id</td>
-            <td>@user.FirstName @user.LastName</td>
+            <td>@user.FName @user.LName</td>
             <td>@user.Age</td>
         </tr>
-        }
+    }
 </table>
 <form action="/Home/AddUser">
     <input type="submit" value="Add a user">
@@ -24,7 +24,20 @@
 <form action="/Home/DeleteUser">
     <input type="submit" value="Delete  a user">
 </form>
+<form action="/Home/UpdateUser">
+    <input type="submit" value="Update a user">
+</form>
+@*@await Html.PartialAsync("AddUser");*@
 <div>
-    <img src="~/image.jpg" alt="image" width="300" />
+    <a href="~/Cookies/AddCookie">
+        <img src="~/image.jpg" alt="image" width="300">
+    </a>
 </div>
-   @* @await Html.PartialAsync("AddUser");*@
+<div>
+    <h2>Message in a config file:</h2>
+    <h2></h2>
+    </div>
+<p><a href="~/Cookies/AddCookie">Cookies page</a></p>
+<p><a href="~/Calc/Index">Calculator page</a></p>
+<p><a href="~/Home/Config">Config page</a></p>
+

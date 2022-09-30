@@ -1,9 +1,9 @@
-﻿using _10_Models;
+﻿using _10_ThreeLayerProject.DAL.Entities;
 using System.Collections.Generic;
 
 namespace _10_ThreeLayerProject.DAL
 {
-    public interface IUserRepository /*: IDisposable*/
+    public interface IUserRepository
     {
         public IEnumerable<User> ReadAll();
         public User Read(int id);

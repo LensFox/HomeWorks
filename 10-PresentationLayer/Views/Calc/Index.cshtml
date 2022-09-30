@@ -1,0 +1,14 @@
+﻿<h1>Calculator</h1>
+<fieldset>
+    <form method="post">
+        <label>First Number:</label><br />
+        <input type="text" name="firstNumber" /><br />
+        <label>Second Number:</label><br />
+        <input type="text" name="secondNumber" /><br />
+        <label>Operation type:</label><br />
+        <input type="text" name="operation" /><br />
+        <input type="submit" value="Calculate">
+    </form>
+    @await Html.PartialAsync("Result")
+</fieldset>
+
