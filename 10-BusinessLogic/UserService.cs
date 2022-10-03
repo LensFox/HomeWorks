@@ -59,23 +59,31 @@ namespace _10_ThreeLayerProject.BLL
 
         public void UpdateById(User user)
         {
-            var userToUpdate = userRepository.Read(user.Id);
-            if (userToUpdate != null)
+            if (user == null)
             {
-                if (user.FirstName != null)
-                {
-                    userToUpdate.FirstName = user.FirstName;
-                }
-                if (user.LastName != null)
-                {
-                    userToUpdate.FirstName = user.LastName;
-                }
-                if (user.Age >= 0)
-                {
-                    userToUpdate.Age = user.Age;
-                }
-                userRepository.Update(userToUpdate);
+                return;
             }
+
+            var userToUpdate = userRepository.Read(user.Id);
+            if (userToUpdate == null)
+            {
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(user.FirstName))
+            {
+                userToUpdate.FirstName = user.FirstName;
+            }
+            if (user.LastName != null)
+            {
+                userToUpdate.LastName = user.LastName;
+            }
+            if (user.Age > 0)
+            {
+                userToUpdate.Age = user.Age;
+            }
+
+            userRepository.Update(userToUpdate);
         }
     }
 }

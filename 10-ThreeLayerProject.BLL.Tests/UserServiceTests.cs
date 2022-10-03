@@ -97,7 +97,7 @@ namespace _10_ThreeLayerProject.BLL.Tests
                 Id = 0,
                 LastName = "L"
             };
-            userRepositoryMock.Setup(q => q.Read(It.IsAny<int>()))
+            userRepositoryMock.Setup(q => q.Read(userEntity.Id))
                 .Returns(userEntity);
             var sut = new UserService(userRepositoryMock.Object, mapper);
             var expectedResult = new DAL.Entities.User
@@ -114,27 +114,31 @@ namespace _10_ThreeLayerProject.BLL.Tests
             Assert.AreEqual(actualResult.FirstName, expectedResult.FirstName);
             Assert.AreEqual(actualResult.Id, expectedResult.Id);
             Assert.AreEqual(actualResult.LastName, expectedResult.LastName);
-            userRepositoryMock.Verify(q => q.Read(1));
+
+            userRepositoryMock.Verify(q => q.Read(userEntity.Id));
         }
 
         [Test]
         public void Read_UserNotFound_ReturnsNull()
         {
+            const int userId = 1;
+
             var mapper = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new UserProfile());
             }).CreateMapper();
 
             var userRepositoryMock = new Mock<IUserRepository>();
-            DAL.Entities.User userEntity = null;
+            userRepositoryMock.Setup(q => q.Read(userId))
+                .Returns((DAL.Entities.User)null);
 
-            userRepositoryMock.Setup(q => q.Read(It.IsAny<int>()))
-                .Returns(userEntity);
             var sut = new UserService(userRepositoryMock.Object, mapper);
 
-            var actualResult = sut.Read(1);
+            var actualResult = sut.Read(userId);
+
             Assert.IsNull(actualResult);
-            userRepositoryMock.Verify(q => q.Read(1));
+
+            userRepositoryMock.Verify(q => q.Read(userId));
         }
 
         [Test]
@@ -146,16 +150,16 @@ namespace _10_ThreeLayerProject.BLL.Tests
             }).CreateMapper();
 
             var userRepositoryMock = new Mock<IUserRepository>();
-            var userEntities = new List<DAL.Entities.User>();
             userRepositoryMock.Setup(q => q.ReadAll())
-                .Returns(userEntities);
+                .Returns(new List<DAL.Entities.User>());
             userRepositoryMock.Setup(q => q.Delete(It.IsAny<int>()));
+
             var sut = new UserService(userRepositoryMock.Object, mapper);
 
             sut.DeleteByName("Timosha Rubanov");
 
             userRepositoryMock.Verify(q => q.ReadAll());
-            userRepositoryMock.VerifyNoOtherCalls();
+            userRepositoryMock.Verify(q => q.Delete(It.IsAny<int>()), Times.Never);
         }
 
         [Test]
@@ -185,8 +189,9 @@ namespace _10_ThreeLayerProject.BLL.Tests
             sut.DeleteByName("Timosha Rubanov");
 
             userRepositoryMock.Verify(q => q.ReadAll());
-            userRepositoryMock.VerifyNoOtherCalls();
+            userRepositoryMock.Verify(q => q.Delete(It.IsAny<int>()), Times.Never);
         }
+
         [Test]
         public void DeleteByName_UserFoundFNameFirst_DeleteUser()
         {
@@ -248,6 +253,56 @@ namespace _10_ThreeLayerProject.BLL.Tests
         }
 
         [Test]
+        public void DeleteByName_TwoUsersFound_DeleteUser()
+        {
+            const int firstDeletedElementId = 0;
+            const int secondDeletedElementId = 1;
+            const int notDeletedElementId = 2;
+
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new UserProfile());
+            }).CreateMapper();
+
+            var userRepositoryMock = new Mock<IUserRepository>();
+            var userEntities = new List<DAL.Entities.User>
+            {
+                new DAL.Entities.User
+                {
+                    Age = 11,
+                    FirstName = "F",
+                    Id = firstDeletedElementId,
+                    LastName = "L"
+                },
+                new DAL.Entities.User
+                {
+                    Age = 11,
+                    FirstName = "L",
+                    Id = secondDeletedElementId,
+                    LastName = "F"
+                },
+                new DAL.Entities.User
+                {
+                    Age = 11,
+                    FirstName = "cat",
+                    Id = notDeletedElementId,
+                    LastName = "dogovich"
+                }
+            };
+            userRepositoryMock.Setup(q => q.ReadAll())
+                .Returns(userEntities);
+            userRepositoryMock.Setup(q => q.Delete(It.IsAny<int>()));
+            var sut = new UserService(userRepositoryMock.Object, mapper);
+
+            sut.DeleteByName("L F");
+
+            userRepositoryMock.Verify(q => q.ReadAll());
+            userRepositoryMock.Verify(q => q.Delete(firstDeletedElementId));
+            userRepositoryMock.Verify(q => q.Delete(secondDeletedElementId));
+            userRepositoryMock.Verify(q => q.Delete(notDeletedElementId), Times.Never);
+        }
+
+        [Test]
         public void UpdateById_InputParameterIsNull_NoUpdate()
         {
             var mapper = new MapperConfiguration(cfg =>
@@ -273,6 +328,7 @@ namespace _10_ThreeLayerProject.BLL.Tests
 
             userRepositoryMock.VerifyNoOtherCalls();
         }
+
         [Test]
         public void UpdateById_NoUserMatch_NoUpdate()
         {
@@ -300,6 +356,7 @@ namespace _10_ThreeLayerProject.BLL.Tests
             userRepositoryMock.Verify(q => q.Read(inputUser.Id));
             userRepositoryMock.VerifyNoOtherCalls();
         }
+
         [Test]
         public void UpdateById_UsersMatch_Update()
         {
@@ -323,13 +380,7 @@ namespace _10_ThreeLayerProject.BLL.Tests
                 Id = 2,
                 LastName = "Last"
             };
-            var userEntityToUpdate = new DAL.Entities.User()
-            {
-                Age = 11,
-                FirstName = "First",
-                Id = 2,
-                LastName = "Last"
-            };
+
             userRepositoryMock.Setup(q => q.Read(It.IsAny<int>()))
                 .Returns(userEntity);
             //userRepositoryMock.Setup(q => q.Update(It.IsAny<DAL.Entities.User>()));
@@ -338,7 +389,50 @@ namespace _10_ThreeLayerProject.BLL.Tests
             sut.UpdateById(inputUser);
 
             userRepositoryMock.Verify(q => q.Read(inputUser.Id));
-            userRepositoryMock.Verify(q => q.Update(userEntityToUpdate));
+            userRepositoryMock.Verify(q => q.Update(It.Is<DAL.Entities.User>(userToUpdate =>
+                userToUpdate.Id == inputUser.Id &&
+                userToUpdate.FirstName == inputUser.FirstName
+            )));
+        }
+
+        [TestCase(-1)]
+        [TestCase(0)]
+        public void UpdateById_SomeFieldsAreNull_Update(int wrongAge)
+        {
+            var mapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new UserProfile());
+            }).CreateMapper();
+
+            var userRepositoryMock = new Mock<IUserRepository>();
+            var inputUser = new User
+            {
+                Age = wrongAge,
+                FirstName = null,
+                Id = 2,
+                LastName = "Last 2"
+            };
+            var userEntity = new DAL.Entities.User()
+            {
+                Age = 12,
+                FirstName = "First",
+                Id = 2,
+                LastName = "Last"
+            };
+
+            userRepositoryMock.Setup(q => q.Read(It.IsAny<int>()))
+                .Returns(userEntity);
+            var sut = new UserService(userRepositoryMock.Object, mapper);
+
+            sut.UpdateById(inputUser);
+
+            userRepositoryMock.Verify(q => q.Read(inputUser.Id));
+            userRepositoryMock.Verify(q => q.Update(It.Is<DAL.Entities.User>(userToUpdate =>
+                userToUpdate.Id == inputUser.Id &&
+                userToUpdate.FirstName == userEntity.FirstName &&
+                userToUpdate.LastName == inputUser.LastName &&
+                userToUpdate.Age == userEntity.Age
+            )));
         }
     }
 }
